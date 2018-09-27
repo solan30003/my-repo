@@ -1,0 +1,6 @@
+innobackupex --defaults-file=/etc/my.cnf --user=root --password=root -–databases "percona" /data/mysql/xtrabackup1/
+
+mysqlslap -uroot -proot --auto-generate-sql
+mysqlslap -uroot -proot --concurrency=100 --number-of-queries=1000 --auto-generate-sql --auto-generate-sql-add-autoincrement
+mysqlslap -uroot -proot --concurrency=100 --number-of-queries=1000 --number-int-cols=5 --number-char-cols=20 --auto-generate-sql --auto-generate-sql-add-autoincrement
+

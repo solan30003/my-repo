@@ -1,0 +1,12 @@
+#!/bin/sh
+# chkconfig:         2345 30 81
+
+#zookeeper
+/usr/local/ins/kafka_2.11-1.0.0/bin/zookeeper-server-start.sh -daemon /usr/local/ins/kafka_2.11-1.0.0/config/zookeeper.properties &
+
+case $1 in  
+ start) /usr/local/ins/kafka_2.11-1.0.0/bin/zookeeper-server-start.sh /usr/local/ins/kafka_2.11-1.0.0/config/zookeeper.properties;;  
+ stop) /usr/local/ins/kafka_2.11-1.0.0/bin/zookeeper-server-stop.sh  /usr/local/ins/kafka_2.11-1.0.0/config/zookeeper.properties;;  
+ *)  echo "require start|stop"  ;;  
+esac 
+
