@@ -2,9 +2,9 @@
 ### 虚拟环境
 IP|主机名|节点|部署
 :----:|:----:|:----:|:----:
-192.168.1.14|server01|Zookeeper<br>Hadoop<br>HBase<br>Hive<br>Sqoop<br>PXC<br>myCat|分布式<br>分布式<br>分布式<br>单机<br>单机<br>分布式<br>单机
-192.168.1.15|server02|Zookeeper<br>Hadoop<br>HBase<br>PXC|分布式<br>分布式<br>分布式<br>分布式
-192.168.1.16|server03|Zookeeper<br>Hadoop<br>HBase<br>PXC<br>Haproxy|分布式<br>分布式<br>分布式<br>分布式<br>单机
+192.168.1.14|server01|Zookeeper<br>Hadoop<br>HBase<br>Hive<br>Sqoop<br>PXC<br>myCat<br>ElasticSearch|分布式<br>分布式<br>分布式<br>单机<br>单机<br>分布式<br>单机<br>分布式
+192.168.1.15|server02|Zookeeper<br>Hadoop<br>HBase<br>PXC<br>ElasticSearch|分布式<br>分布式<br>分布式<br>分布式<br>分布式
+192.168.1.16|server03|Zookeeper<br>Hadoop<br>HBase<br>PXC<br>Haproxy<br>ElasticSearch|分布式<br>分布式<br>分布式<br>分布式<br>单机<br>分布式
 
 #### 服务器 192.168.1.14 server01
 * Zookeeper **(server.0)**
@@ -29,6 +29,10 @@ SQOOP_HOME=/usr/local/sqoop-1.4.7
 ```
 * PXC **(server-id=143306)**
 * myCat **(8066)**
+* ElasticSearch **(9200)**
+```
+SQOOP_HOME=/usr/local/elasticsearch-2.4.6
+```
 
 #### 服务器 192.168.1.15 server02
 * Zookeeper **(server.1)**
@@ -44,7 +48,10 @@ HADOOP_HOME=/home/hadoop/hadoop-2.8.5
 HBASE_HOME=/usr/local/hbase-2.0.2
 ```
 * PXC **(server-id=153306)**
-
+* ElasticSearch **(9200)**
+```
+SQOOP_HOME=/usr/local/elasticsearch-2.4.6
+```
 
 #### 服务器 192.168.1.16 server03
 * Zookeeper **(server.2)**
@@ -61,7 +68,10 @@ HBASE_HOME=/usr/local/hbase-2.0.2
 ```
 * PXC **(server-id=163306)**
 * Haproxy **(3307, Web:3077)**
-
+* ElasticSearch **(9200)**
+```
+SQOOP_HOME=/usr/local/elasticsearch-2.4.6
+```
 
 
 
