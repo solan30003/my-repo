@@ -60,7 +60,7 @@ HADOOP_HOME=/home/hadoop/hadoop-2.8.5
 HBASE_HOME=/usr/local/hbase-2.0.2
 ```
 * PXC **(server-id=163306)**
-* Haproxy **(3307,3077)**
+* Haproxy **(3307, Web:3077)**
 
 
 
