@@ -3,8 +3,8 @@
 IP|主机名|节点|部署
 :----:|:----:|:----:|:----:
 192.168.1.14|server01|Zookeeper<br>Hadoop<br>HBase<br>Hive|分布式<br>分布式<br>分布式<br>单机
-192.168.1.15|server02|Zookeeper<br>Hadoop<br>HBase|分布式<br>分布式<br>分布式<br>-
-192.168.1.16|server03|Zookeeper<br>Hadoop<br>HBase|分布式<br>分布式<br>分布式<br>-
+192.168.1.15|server02|Zookeeper<br>Hadoop<br>HBase|分布式<br>分布式<br>分布式
+192.168.1.16|server03|Zookeeper<br>Hadoop<br>HBase|分布式<br>分布式<br>分布式
 
 #### 192.168.1.14 server01
 * Zookeeper **(server.0)**
