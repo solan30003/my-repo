@@ -21,32 +21,45 @@ sudo systemctl stop docker.service
 ### 3.常用命令
 [docker命令大全](http://www.runoob.com/docker/docker-command-manual.html)
 ```
+# 构建image ，Dockerfile与在*.jar在同一个目录，并且切换到当前目录下执行
+sudo docker build -t config-server:0.0.6 .
+# -t 命名； -f 指定Dockerfile路径
+
 # 登录镜像仓库
 sudo docker login --username=solan8000 XXXXXX.cn-hangzhou.aliyuncs.com
 # 修改镜像名称
 sudo docker tag [ImageId 或 image-name:<镜像版本号>] image-name:[镜像版本号]
 # 推送镜像到仓库
 sudo docker push XXXXXX.cn-hangzhou.aliyuncs.com/solan-repo/image-name:[镜像版本号]
+# 从仓库拉取镜像
+sudo docker pull XXXXXX.cn-hangzhou.aliyuncs.com/solan-repo/image-name:[镜像版本号]
 # 列出image
-docker images
+sudo docker images
 
 # 运行容器
-docker run -it -d -p 8090:8090 --name c14-b-8090 --hostname h14-b-8090 -e "spring.profiles.active=prod" -e "eureka.instance.hostname=192.168.1.14" -e "eureka.instance.ip-address=192.168.1.14" -e "spring.cloud.config.uri=http://user:user@192.168.1.15:7090/" f325bbb7cb9a
-docker run -it -d -p 9090:9090 --name c15-b-9090 --hostname h15-b-9090 -e "spring.profiles.active=prod" -e "eureka.instance.hostname=192.168.1.15" -e "eureka.instance.ip-address=192.168.1.15" -e "spring.cloud.config.uri=http://user:user@192.168.1.15:7090/" 4eab96fd64df
-docker run -it -d -p 7090:7090 --name c15-config-7090 --hostname h15-config-7090 -v /usr/install/config:/usr/install/config -e "spring.profiles.active=native"  -e "eureka.instance.hostname=192.168.1.15" -e "eureka.instance.ip-address=192.168.1.15" 11c9824feb45
-docker run -it -d -p 7090:7090 --name c15-config-7090 --hostname h15-config-7090 -v /usr/install/config:/usr/install/config -e "spring.profiles.active=prod"  -e "eureka.instance.hostname=192.168.1.15" -e "eureka.instance.ip-address=192.168.1.15" dcd7b2404dbb
+sudo docker run -it -d -p 8762:8762 --name c14-eureka-8762 --hostname h14-eureka-8762 -e "eureka.instance.instance-id=192.168.1.14:8762" -e "server.port=8762" -e "spring.profiles.active=peer1" -e "eureka.instance.hostname=192.168.1.14" -e "eureka.instance.prefer-ip-address=true" -e "eureka.instance.ip-address=192.168.1.14" -e "eureka.client.service-url.defaultZone=http://192.168.1.15:8762/eureka/,http://192.168.1.16:8762/eureka/" 4645bc620788
+sudo docker run -it -d -p 8762:8762 --name c15-eureka-8762 --hostname h15-eureka-8762 -e "eureka.instance.instance-id=192.168.1.15:8762" -e "server.port=8762" -e "spring.profiles.active=peer2" -e "eureka.instance.hostname=192.168.1.15" -e "eureka.instance.prefer-ip-address=true" -e "eureka.instance.ip-address=192.168.1.15" -e "eureka.client.service-url.defaultZone=http://192.168.1.14:8762/eureka/,http://192.168.1.16:8762/eureka/" 4645bc620788
+sudo docker run -it -d -p 8762:8762 --name c16-eureka-8762 --hostname h16-eureka-8762 -e "eureka.instance.instance-id=192.168.1.16:8762" -e "server.port=8762" -e "spring.profiles.active=peer3" -e "eureka.instance.hostname=192.168.1.16" -e "eureka.instance.prefer-ip-address=true" -e "eureka.instance.ip-address=192.168.1.16" -e "eureka.client.service-url.defaultZone=http://192.168.1.14:8762/eureka/,http://192.168.1.15:8762/eureka/" 4645bc620788
+
+sudo docker run -it -d -p 8090:8090 --name c15-a-8090 --hostname h15-a-8090 -e "spring.profiles.active=prod" -e "eureka.instance.hostname=192.168.1.15" -e "eureka.instance.ip-address=192.168.1.15" -e "spring.cloud.config.uri=http://user:user@192.168.1.15:7090/" -e "eureka.client.service-url.defaultZone=http://192.168.1.14:8762/eureka/,http://192.168.1.15:8762/eureka/,http://192.168.1.16:8762/eureka/" 26448b110638
+sudo docker run -it -d -p 9090:9090 --name c16-b-9090 --hostname h16-b-9090 -e "spring.profiles.active=prod" -e "eureka.instance.hostname=192.168.1.16" -e "eureka.instance.ip-address=192.168.1.16" -e "spring.cloud.config.uri=http://user:user@192.168.1.15:7090/" -e "eureka.client.service-url.defaultZone=http://192.168.1.14:8762/eureka/,http://192.168.1.15:8762/eureka/,http://192.168.1.16:8762/eureka/" 9a81e626abf3
+
+sudo docker run -it -d -p 7090:7090 --name c15-config-7090 --hostname h15-config-7090 -v /usr/install/config:/usr/install/config -e "spring.profiles.active=native"  -e "eureka.instance.hostname=192.168.1.15" -e "eureka.instance.ip-address=192.168.1.15" 11c9824feb45
+sudo docker run -it -d -p 7090:7090 --name c15-config-7090 --hostname h15-config-7090 -v /usr/install/config:/usr/install/config -e "spring.profiles.active=prod"  -e "eureka.instance.hostname=192.168.1.15" -e "eureka.instance.ip-address=192.168.1.15" -e "eureka.client.service-url.defaultZone=http://192.168.1.14:8762/eureka/,http://192.168.1.15:8762/eureka/,http://192.168.1.16:8762/eureka/" ed8cc8f27c4e
 
 # 停止容器
-docker stop c14-b-8090
+sudo docker stop c14-b-8090
 
+# 删除镜像
+sudo docker rmi dcd7b2404dbb
 # 删除容器(要先停止)
-docker rm c14-b-8090
+sudo docker rm c14-b-8090
 # 删除所有容器
-docker rm $(docker ps -a -q)
+sudo docker rm $(docker ps -a -q)
 
 # 列出容器,docker ps 默认列表是正在启动的容器 -a是显示所有创建的容器
- docker ps -a
+sudo docker ps -a
 
 # 查看指定容器的日志
- docker logs -f c14-b-8090
+sudo docker logs -f c14-b-8090
 ```
